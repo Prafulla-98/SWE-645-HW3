@@ -2,6 +2,7 @@ package com.example.swe645hw3.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import java.util.Random;
 
 @Entity
 public class StudentSurvey {
@@ -24,32 +25,33 @@ public class StudentSurvey {
 	private String likes;
 	private String interests;
 	private String likelihood;
+
+	private String getRandomString() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
+    }
 	
-	public String getLikes() {
-		return likes;
+	public StudentSurvey() {
+		super();
+		this.id = getRandomString();
+		this.firstName = "";
+		this.lastName = "";
+		this.address = "";
+		this.city = "";
+		this.state = "";
+		this.zip = "";
+		this.phone = "";
+		this.email = "";
+		this.date = "";
 	}
-
-	public void setLikes(String likes) {
-		this.likes = likes;
-	}
-
-	public String getInterests() {
-		return interests;
-	}
-
-	public void setInterests(String interests) {
-		this.interests = interests;
-	}
-
-	public String getLikelihood() {
-		return likelihood;
-	}
-
-	public void setLikelihood(String likelihood) {
-		this.likelihood = likelihood;
-	}
-
-	public StudentSurvey() {}
 
 	public StudentSurvey(String id, String firstName, String lastName, String address, String city, String state,
 			String zip, String phone, String email, String date) {
@@ -138,7 +140,29 @@ public class StudentSurvey {
 		this.date = date;
 	}
 	
-	
+	public String getLikes() {
+		return likes;
+	}
+
+	public void setLikes(String likes) {
+		this.likes = likes;
+	}
+
+	public String getInterests() {
+		return interests;
+	}
+
+	public void setInterests(String interests) {
+		this.interests = interests;
+	}
+
+	public String getLikelihood() {
+		return likelihood;
+	}
+
+	public void setLikelihood(String likelihood) {
+		this.likelihood = likelihood;
+	}
 	
 
 }
